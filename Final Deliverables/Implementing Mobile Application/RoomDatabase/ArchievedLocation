@@ -1,0 +1,53 @@
+package com.example.ArchievedLocation.roomdatabase;
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
+public class ArchievedLocation {
+
+    @PrimaryKey
+    @NonNull
+    private String conatainerDateTimeComposite;
+
+    private long count;
+
+    public ArchievedLocation() {
+         
+    }
+
+    @Ignore
+    public ArchievedLocation(String conatainerDateTimeComposite, long count) {
+        this.conatainerDateTimeComposite = conatainerDateTimeComposite;
+        this.count = count;
+    }
+
+    @Ignore
+    public String[] splitPrimaryKey(){
+     
+        return conatainerDateTimeComposite.split("_");
+    }
+
+    @Ignore
+    public String getATencodedlatlon(){
+ String[] splited = conatainerDateTimeComposite.split("_");
+
+    return splited[0].replaceAll("\\.","@");
+
+    }
+    public void setConatainerDateTimeComposite(String conatainerDateTimeComposite) {
+        this.conatainerDateTimeComposite = conatainerDateTimeComposite;
+    }
+  public void setCount(long count) {
+        this.count = count;
+    }
+    public String getConatainerDateTimeComposite() {
+        return conatainerDateTimeComposite;
+    }
+public long getCount() {
+        return count;
+    }
+
+}
