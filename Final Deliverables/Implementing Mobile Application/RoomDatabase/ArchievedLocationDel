@@ -1,0 +1,31 @@
+package com.example.containmentzone_alert.roomdatabase;
+
+
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+
+import java.util.List;
+
+@Dao
+public interface ArchievedLocationDay {
+
+    @Insert
+    void insertLocations(ArchievedLocation archievedlocation);
+
+    @Query("UPDATE archievedlocation SET count = count+1 WHERE conatainerDateTimeComposite = :primaryKey")
+    void update(String primaryKey);
+
+    @Query("SELECT * FROM archievedlocation")
+    List<VisitedLocations> fetchAll();
+
+    @Query("DELETE FROM archievedlocation WHERE conatainerDateTimeComposite LIKE :sqlFormatsevenDayAgoDate")
+    void deleteSevenDaysAgoVisitedLocations(String sqlFormatsevenDayAgoDate);
+
+    @Query("DELETE FROM archievedlocation WHERE conatainerDateTimeComposite = :primaryKey")
+    void deletebyPrimaryKey(String primaryKey);
+    @Delete
+    void deleteLocation(ArchievedLocatioin archievedlocation);
+
+}
